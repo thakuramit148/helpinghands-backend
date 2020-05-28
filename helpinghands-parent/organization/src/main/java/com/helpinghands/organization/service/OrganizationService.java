@@ -75,7 +75,7 @@ public class OrganizationService {
 	
 	public List<OrganizationDetail> getList(List<Integer> listOfIds){
 		List<OrganizationDetail> list = new ArrayList<>();
-		listOfIds.forEach(id -> {
+		listOfIds.parallelStream().forEach(id -> {
 			try {
 				list.add(findOrganizationDetaislById(id).getData());
 			} catch (Exception e) {

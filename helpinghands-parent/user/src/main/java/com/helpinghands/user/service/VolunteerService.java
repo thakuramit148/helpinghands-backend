@@ -31,7 +31,7 @@ public class VolunteerService {
 		List<UserDonation> userDonations = volunteerRepository.getAllPickupsByVolunteerId(volId);
 		if (userDonations.size() > 0) {
 			List<UserDonationDetail> list = new ArrayList<>();
-			userDonations.forEach(data -> {
+			userDonations.parallelStream().forEach(data -> {
 				UserDonationDetail details = new UserDonationDetail();
 				details.setPickupId(volunteerRepository.getPickupId(volId, data.getId()).get(0));
 				details.setOrgName(volunteerRepository.getOrganizationNameById(data.getOrgId()));

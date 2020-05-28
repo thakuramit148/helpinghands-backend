@@ -29,7 +29,7 @@ public class EmployeePickupService {
 		List<UserDonation> userDonations = employeePickupRepository.getAllPickupsByEmployeeId(empId);
 		if (userDonations.size() > 0) {
 			List<UserDonationDetail> list = new ArrayList<>();
-			userDonations.forEach(data -> {
+			userDonations.parallelStream().forEach(data -> {
 				UserDonationDetail details = new UserDonationDetail();
 				details.setPickupId(employeePickupRepository.getPickupId(empId, data.getId()).get(0));
 				details.setOrgName(employeePickupRepository.getOrganizationNameById(data.getOrgId()));
