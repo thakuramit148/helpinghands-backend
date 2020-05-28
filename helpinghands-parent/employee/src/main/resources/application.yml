@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/helping_hand?serverTimezone=UTC
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: employee-ms
+
+server:
+  port: 8084
+
+logging:
+  level:
+    org:
+      springframework: ERROR 
+    profile: 
+      exception: ERROR
+      
+#eureka: 
+#  client:
+#    registerWithEureka: true
+#    fetchRegistry: true
+#    serviceUrl:
+#      defaultZone: http://localhost:8000/eureka/

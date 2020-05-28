@@ -1,0 +1,35 @@
+# Eclipse
+/**/.settings/
+/**/build/
+*.class
+*.project
+*.classpath
+/**/.metadata/
+
+# Intellij
+/**/.idea/
+/**/.metadata/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Maven
+/**/log/
+/**/target/
+/**/buildNumber.properties
+/**/bin/
+/**/src/assembly/merge.xml
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+# ClearCase
+*.copyarea.db
+*.keep
+
+# Git
+*.orig

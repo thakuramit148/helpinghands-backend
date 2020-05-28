@@ -1,0 +1,44 @@
+server: 
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  datasource:
+    url: jdbc:mysql://localhost:3306/helping_hand?serverTimezone=UTC
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#eureka: 
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    serviceUrl:
+#      defaultZone: http://localhost:8000/eureka/
+      
+logging:
+  level:
+    org:
+      springframework: ERROR 
+    profile: 
+      exception: ERROR
+      
+zuul:
+  ignored-services: "*"
+  routes:
+    user-ms:
+      path: /user-service/**
+      location: http://localhost:8081
+    admin-ms:
+      path: /admin-service/**
+      location: http://localhost:8082
+    organization-ms:
+      path: /organization-service/**
+      location: http://localhost:8083
+    employee-ms:
+      path: /employee-service/**
+      location: http://localhost:8084
+#    utils-service:
+#      path: /utils-service/**
+#      location: http://localhost:8083
