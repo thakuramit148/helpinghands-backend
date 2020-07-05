@@ -28,7 +28,7 @@ public class DonationService {
 		List<UserDonation> userDonations = donationRepository.findAllDonationByUserId(userId);
 		if (userDonations.size() > 0) {
 			List<UserDonationDetail> list = new ArrayList<>();
-			userDonations.parallelStream().forEach(data -> {
+			userDonations.forEach(data -> {
 				UserDonationDetail details = new UserDonationDetail();
 				details.setOrgName(donationRepository.getOrganizationNameById(data.getOrgId()));
 				details.setDetails(data);
@@ -45,7 +45,7 @@ public class DonationService {
 		List<UserDonation> userDonations = donationRepository.findAllDonationByOrgId(orgId);
 		if (userDonations.size() > 0) {
 			List<UserDonationDetail> list = new ArrayList<>();
-			userDonations.parallelStream().forEach(data -> {
+			userDonations.forEach(data -> {
 				UserDonationDetail details = new UserDonationDetail();
 				details.setOrgName(donationRepository.getOrganizationNameById(data.getOrgId()));
 				details.setDetails(data);
@@ -66,7 +66,7 @@ public class DonationService {
 		int donationId = donationRepository.addUserDonationToOrganization(model);
 		if (donationId > 0) {
 			List<UserDonationCategory> listOfCategories = model.getCategories();
-			listOfCategories.parallelStream().forEach(data -> {
+			listOfCategories.forEach(data -> {
 				data.setDonationId(donationId);
 			});
 			if (donationRepository.addUserDonationCategory(listOfCategories) > 0) {

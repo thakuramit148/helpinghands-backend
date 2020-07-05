@@ -1,0 +1,98 @@
+version: '3'
+
+services:
+    user:
+        build: ./user
+        image: helping-hand/user:1.0
+        container_name: user
+        restart: always
+        expose: 
+            - "8081"
+        ports:
+            - "8081:8081"
+        depends_on: 
+            - mysql-service
+        links: 
+            - mysql-service
+        environment: 
+            MYSQL_ALLOW_EMPTY_PASSWORD:
+
+    admin:
+        build: ./admin
+        image: helping-hand/admin:1.0
+        container_name: admin
+        restart: always
+        expose: 
+            - "8082"
+        ports:
+            - "8082:8082"
+        depends_on: 
+            - mysql-service
+        links: 
+            - mysql-service
+        environment: 
+            MYSQL_ALLOW_EMPTY_PASSWORD:
+
+    organization:
+        build: ./organization
+        image: helping-hand/organization:1.0
+        container_name: organization
+        restart: always
+        expose: 
+            - "8083"
+        ports:
+            - "8083:8083"
+        depends_on: 
+            - mysql-service
+        links: 
+            - mysql-service
+        environment: 
+            MYSQL_ALLOW_EMPTY_PASSWORD:
+    
+    employee:
+        build: ./employee
+        image: helping-hand/employee:1.0
+        container_name: employee
+        restart: always
+        expose: 
+            - "8084"
+        ports:
+            - "8084:8084"
+        depends_on: 
+            - mysql-service
+        links: 
+            - mysql-service
+        environment: 
+            MYSQL_ALLOW_EMPTY_PASSWORD:
+
+    api-gateway:
+        build: ./api-gateway
+        image: helping-hand/api-gateway:1.0
+        container_name: api-gateway
+        restart: always
+        expose: 
+            - "8080"
+        ports:
+            - "8080:8080"
+        depends_on: 
+            - mysql-service
+            - employee
+            - organization
+            - admin
+            - user
+        links: 
+            - mysql-service
+            - user
+            - admin
+            - organization
+            - employee
+        environment: 
+            MYSQL_ALLOW_EMPTY_PASSWORD:
+
+    mysql-service:
+        image: mysql:5.6
+        container_name: mysql-service
+        user: 'root'
+        environment: 
+           - MYSQL_ALLOW_EMPTY_PASSWORD=true
+        #    - MYSQL_DATABASE=helping_hand
