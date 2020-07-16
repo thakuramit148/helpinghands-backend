@@ -5,9 +5,9 @@ spring:
   application:
     name: api-gateway
   datasource:
-    url: jdbc:mysql://mysql-service:3306/helping_hand?serverTimezone=UTC
+    url: ${DB_URL}
     username: root
-    password:
+    password: ${MYSQL_ROOT_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 #eureka: 
@@ -29,13 +29,13 @@ zuul:
   routes:
     user-ms:
       path: /user-service/**
-      location: http://localhost:8081
+      location: ${USER_SERVICE_URL}
     admin-ms:
       path: /admin-service/**
-      location: http://localhost:8082
+      location: ${ADMIN_SERVICE_URL}
     organization-ms:
       path: /organization-service/**
-      location: http://localhost:8083
+      location: ${ORGANIZATION_SERVICE_URL}
     employee-ms:
       path: /employee-service/**
-      location: http://localhost:8084
+      location: ${EMPLOYEE_SERVICE_URL}
