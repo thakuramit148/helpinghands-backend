@@ -2,8 +2,8 @@ version: '3'
 
 services:
     user:
-        # build: ./user
-        image: thakuramit148/helping-hands-user:1.0
+        build: ./user
+        image: thakuramit148/helping-hands-user:2.0
         container_name: user
         restart: always
         expose: 
@@ -19,8 +19,8 @@ services:
             - DB_URL=jdbc:mysql://mysql-service:3306/helping_hand?serverTimezone=UTC
 
     admin:
-        # build: ./admin
-        image: thakuramit148/helping-hands-admin:1.0
+        build: ./admin
+        image: thakuramit148/helping-hands-admin:2.0
         container_name: admin
         restart: always
         expose: 
@@ -36,8 +36,8 @@ services:
             - DB_URL=jdbc:mysql://mysql-service:3306/helping_hand?serverTimezone=UTC
 
     organization:
-        # build: ./organization
-        image: thakuramit148/helping-hands-organization:1.0
+        build: ./organization
+        image: thakuramit148/helping-hands-organization:2.0
         container_name: organization
         restart: always
         expose: 
@@ -53,8 +53,8 @@ services:
             - DB_URL=jdbc:mysql://mysql-service:3306/helping_hand?serverTimezone=UTC
     
     employee:
-        # build: ./employee
-        image: thakuramit148/helping-hands-employee:1.0
+        build: ./employee
+        image: thakuramit148/helping-hands-employee:2.0
         container_name: employee
         restart: always
         expose: 
@@ -70,8 +70,8 @@ services:
             - DB_URL=jdbc:mysql://mysql-service:3306/helping_hand?serverTimezone=UTC
 
     api-gateway:
-        # build: ./api-gateway
-        image: thakuramit148/helping-hands-api-gateway:1.0
+        build: ./api-gateway
+        image: thakuramit148/helping-hands-api-gateway:2.0
         container_name: api-gateway
         restart: always
         expose: 
@@ -93,10 +93,10 @@ services:
         environment: 
             - DB_URL=jdbc:mysql://mysql-service:3306/helping_hand?serverTimezone=UTC
             - MYSQL_ROOT_PASSWORD=@helping-hand@
-            - USER_SERVICE_URL=http://192.168.0.33:8081
-            - ADMIN_SERVICE_URL=http://192.168.0.33:8082
-            - ORGANIZATION_SERVICE_URL=http://192.168.0.33:8083
-            - EMPLOYEE_SERVICE_URL=http://192.168.0.33:8084
+            - USER_SERVICE_URL=http://user:8081
+            - ADMIN_SERVICE_URL=http://admin:8082
+            - ORGANIZATION_SERVICE_URL=http://organization:8083
+            - EMPLOYEE_SERVICE_URL=http://employee:8084
 
     mysql-service:
         image: thakuramit148/helping-hands-db:1.0
@@ -107,13 +107,13 @@ services:
            - MYSQL_ROOT_PASSWORD=@helping-hand@
 
     frontend:
-        # build: ./frontend
-        image: thakuramit148/helping-hands-frontend:1.0
+        build: ./frontend
+        image: thakuramit148/helping-hands-frontend:2.0
         container_name: frontend
         restart: always
         expose: 
             - "80"
         ports:
             - "4200:80"
-        # depends_on: 
-        #     - api-gateway
+        depends_on: 
+            - api-gateway

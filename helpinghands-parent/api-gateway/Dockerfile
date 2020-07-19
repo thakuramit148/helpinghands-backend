@@ -1,4 +1,4 @@
-FROM openjdk:8
+FROM openjdk:8-alpine
 
 ARG JAR_FILE="api-gateway.jar"
 
